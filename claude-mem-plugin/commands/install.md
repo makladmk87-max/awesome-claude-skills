@@ -1,65 +1,63 @@
 ---
-description: Install claude-mem - persistent memory for Claude Code sessions
+description: Install claude-mem - persistent memory across Claude Code sessions
 allowed-tools: [Bash, AskUserQuestion]
 ---
 
 # Claude-Mem Installation
 
-Install the claude-mem plugin to give Claude persistent memory across coding sessions. It automatically captures context, compresses it with AI, and injects relevant history into future sessions.
+Install the claude-mem plugin to give Claude persistent memory across coding sessions. It automatically captures context, compresses it with AI, and injects relevant history into future sessions — no API keys or accounts required.
 
 ## Instructions
 
 ### Step 1: Install from Marketplace
 
-Run these two commands in sequence:
-
-```bash
-claude --dangerously-skip-permissions -p "/plugin marketplace add thedotmack/claude-mem"
-```
-
-Then:
-
-```bash
-claude --dangerously-skip-permissions -p "/plugin install claude-mem"
-```
-
-If running inside a Claude Code session, you can run the slash commands directly:
+Tell the user to run these two commands in their Claude Code terminal:
 
 ```
 /plugin marketplace add thedotmack/claude-mem
 /plugin install claude-mem
 ```
 
-### Step 2: Verify Installation
+**Note:** Do not use `npm install -g claude-mem` — that installs the SDK library only and does not set up the plugin hooks or worker service. Always use the `/plugin` commands above.
 
-Check that claude-mem is listed in installed plugins:
+### Step 2: Restart Claude Code
 
-```bash
-claude --dangerously-skip-permissions -p "/plugin list"
+After both commands complete, the user must restart Claude Code for the plugin to activate.
+
+### Step 3: Verify
+
+After restarting, context from previous sessions will automatically appear in new conversations.
+
+To confirm the plugin is running, the user can check:
+```
+http://localhost:37777
 ```
 
-You should see `claude-mem` in the output.
+The web viewer UI should be accessible and showing the memory stream.
 
-### Step 3: Confirm
+### Step 4: Confirm
 
 Tell the user:
 
 ```
 Claude-Mem installed successfully!
 
-To activate: exit and run `claude` again
+Restart Claude Code to activate.
 
-Once restarted, Claude will automatically:
-- Capture context from your coding sessions
-- Remember past work across projects
+Once running, Claude will automatically:
+- Capture context from every coding session
+- Remember past work across all projects
 - Inject relevant history at the start of each session
 
-View your memory store at: http://localhost:37777
+View your memory at: http://localhost:37777
+
+To search past sessions, use the mem-search skill.
 ```
 
 ## Important
 
-- claude-mem stores all data locally in a SQLite database on your machine
-- No API keys or accounts required
+- All data is stored locally in a SQLite database on your machine
+- No API keys, accounts, or cloud services required
 - Mark sensitive content with `<private>` tags to exclude from storage
-- Node.js 18.0.0 or higher is required
+- Node.js 18.0.0 or higher is required (Bun and uv are auto-installed if missing)
+- For troubleshooting, describe the issue to Claude — the troubleshoot skill will diagnose it automatically
