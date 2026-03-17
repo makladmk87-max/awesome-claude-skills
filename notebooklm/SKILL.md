@@ -23,6 +23,30 @@ pip install "git+https://github.com/teng-lin/notebooklm-py@${LATEST_TAG}"
 
 ⚠️ **DO NOT install from main branch** (`pip install git+https://github.com/teng-lin/notebooklm-py`). The main branch may contain unreleased/unstable changes. Always use PyPI or a specific release tag, unless you are testing unreleased features.
 
+### Termux / Android (Playwright not supported)
+
+Playwright does not run on Termux (Android). Use [`notebooklm-mcp-cli`](https://github.com/jacob-bd/notebooklm-mcp-cli) instead — it extracts cookies from your existing browser rather than launching one:
+
+```bash
+pip install notebooklm-mcp-cli
+nlm auth login
+```
+
+If auto login doesn't work, export cookies from Chrome/Firefox on Android (e.g. using the "Cookie-Editor" browser extension), save them as a JSON file, and import manually:
+
+```bash
+nlm auth login --manual
+```
+
+Verify setup with:
+
+```bash
+nlm doctor
+nlm notebook list
+```
+
+> **Note:** `notebooklm-mcp-cli` uses the `nlm` command instead of `notebooklm`. Commands differ from `notebooklm-py` — refer to its [README](https://github.com/jacob-bd/notebooklm-mcp-cli) for the full CLI reference.
+
 **Skill install methods:**
 
 - `notebooklm skill install` installs this skill into the supported local agent directories managed by the CLI.
