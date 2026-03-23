@@ -316,9 +316,28 @@ Pre-built workflow skills for 78 SaaS apps via [Rube MCP (Composio)](https://com
 
 ### Using Skills in Claude.ai
 
-1. Click the skill icon (🧩) in your chat interface.
-2. Add skills from the marketplace or upload custom skills.
-3. Claude automatically activates relevant skills based on your task.
+The [`claude-ai/`](./claude-ai/) folder contains pre-bundled skill files ready to drop into a **claude.ai Project**.
+
+**Setup (5 minutes):**
+
+1. Go to [claude.ai](https://claude.ai) → **New Project**
+2. Open **Edit project instructions** → paste the contents of [`claude-ai/system-prompt.md`](./claude-ai/system-prompt.md)
+3. Upload all `.md` files from the [`claude-ai/`](./claude-ai/) folder to the project's **Knowledge** section:
+   - `superpowers.md` (14 skills)
+   - `gsd.md` (32 skills)
+   - `notion.md` (10 skills)
+   - `figma.md` (5 skills)
+   - `adspirer.md` (4 skills)
+   - `claude-api.md` (3 skills)
+   - `utilities.md` (39 skills)
+4. Start a conversation and trigger any skill in plain English — e.g. *"Load superpowers"*, *"Plan phase 3"*, *"Tailor my resume for [job]"*
+
+See [`claude-ai/README.md`](./claude-ai/README.md) for the full setup guide and trigger phrase reference.
+
+To regenerate after adding new skills:
+```bash
+python3 generate_claude_ai.py
+```
 
 ### Using Skills in Claude Code
 
